@@ -1,9 +1,9 @@
-export const SITE_TITLE = 'Sify Blog';
-export const SITE_DESCRIPTION = '一个基于 Astro 的现代化博客主题';
-export const SITE_AUTHOR = 'santisify';
-export const SITE_URL = 'https://santisify.top';
-export const SITE_AVATAR = 'https://santisify.top/_vercel/image?url=_astro%2Favatar.BpCip-1B.png&w=1200&q=100';
-export const SITE_COVER = 'https://santisify.top/_vercel/image?url=_astro%2Fcf2227.wczNDBh1.webp&w=1920&q=100';
+export const SITE_TITLE = "Alex's Life";
+export const SITE_DESCRIPTION = 'A personal blog about network engineering, diving, and life beneath and beyond the surface.';
+export const SITE_AUTHOR = 'Alex XU';
+export const SITE_URL = 'https://safetystop.qzz.io';
+export const SITE_AVATAR = '/images/avatar.png';
+export const SITE_COVER = 'images/background.jpg';
 
 export const PAGE_SIZE = 10;
 
