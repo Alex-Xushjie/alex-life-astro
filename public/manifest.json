@@ -1,6 +1,6 @@
 {
-  "name": "Sify Blog",
-  "short_name": "Sify",
+  "name": "Alex's Life",
+  "short_name": "Alex's Life",
   "description": "一个基于 Astro 的现代化博客主题",
   "start_url": "/",
   "display": "standalone",

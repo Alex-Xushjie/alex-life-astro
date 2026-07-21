@@ -1,9 +1,6 @@
-const CACHE_NAME = 'sify-blog-v1';
+const CACHE_NAME = 'sify-blog-v2';
 const STATIC_ASSETS = [
-  '/',
   '/favicon.svg',
-  '/rss.xml',
-  '/search-index.json',
 ];
 
 self.addEventListener('install', (event) => {
@@ -30,6 +27,25 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+
+  // HTML must prefer the network so a deployment never remains stuck on an
+  // older cached version. The cache is only an offline fallback.
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
