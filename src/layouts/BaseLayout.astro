@@ -26,7 +26,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <SEO title={title} description={description} image={image} ogType={ogType} />
     <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
@@ -134,6 +134,19 @@ const {
           navigator.serviceWorker.register('/sw.js').catch(() => {});
         });
       }
+    </script>
+    <script is:inline>
+      (() => {
+        const savedLocale = localStorage.getItem('locale');
+        const locale = savedLocale || 'en';
+
+        if (!savedLocale) {
+          localStorage.setItem('locale', locale);
+        }
+
+        document.documentElement.lang =
+          locale === 'zh' ? 'zh-CN' : 'en';
+      })();
     </script>
   </body>
 </html>
