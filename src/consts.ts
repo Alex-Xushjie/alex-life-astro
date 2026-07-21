@@ -1,5 +1,5 @@
 export const SITE_TITLE = "Alex's Life";
-export const SITE_DESCRIPTION = 'A personal blog about network engineering, diving, and life beneath and beyond the surface.';
+export const SITE_DESCRIPTION = 'Bridging the digital world, exploring the deep blue.';
 export const SITE_AUTHOR = 'Alex XU';
 export const SITE_URL = 'https://safetystop.qzz.io';
 export const SITE_AVATAR = '/images/avatar.png';
@@ -16,7 +16,7 @@ export const NAV_ITEMS = [
 ];
 
 export const SOCIAL_LINKS = [
-  { name: 'GitHub', href: 'https://github.com/santisify', icon: 'github' },
+  { name: 'GitHub', href: 'https://github.com/Alex-Xushjie', icon: 'github' },
   { name: 'RSS', href: '/rss.xml', icon: 'rss' },
 ];
 
