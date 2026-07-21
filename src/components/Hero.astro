@@ -1,0 +1,60 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+---
+
+<section class="relative overflow-hidden bg-[#111318]">
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#4b6bff]/5 via-transparent to-transparent"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#4b6bff]/[0.03] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-36 pb-20 sm:pb-24 lg:pb-28">
+    <div class="max-w-2xl">
+      <h1
+        class="text-4xl sm:text-5xl font-semibold text-white tracking-tight leading-[1.02] mb-4 hero-reveal"
+        data-hero-reveal
+      >
+        {SITE_TITLE}
+      </h1>
+      <p
+        class="text-base sm:text-lg text-white/50 font-light leading-relaxed hero-reveal"
+        data-hero-reveal
+      >
+        {SITE_DESCRIPTION}
+      </p>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20 hero-reveal" data-hero-reveal>
+    <span class="text-[10px] tracking-widest uppercase">Scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
+  </div>
+</section>
+
+<script is:inline>
+  import gsap from 'gsap';
+
+  function initHero() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const reveals = document.querySelectorAll('[data-hero-reveal]');
+    if (reveals.length === 0) return;
+
+    gsap.fromTo(reveals,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
+        delay: 0.1,
+      }
+    );
+  }
+
+  initHero();
+  document.addEventListener('astro:after-swap', () => {
+    setTimeout(initHero, 100);
+  });
+</script>

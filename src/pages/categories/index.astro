@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const allPosts = await getCollection('blog');
+
+const categoryMap = new Map<string, { count: number; latestPost: any }>();
+
+for (const post of allPosts) {
+  const cat = post.data.category;
+  if (!cat) continue;
+  if (cat.includes('/')) {
+    const parts = cat.split('/');
+    for (let i = 0; i < parts.length; i++) {
+      const subCat = parts.slice(0, i + 1).join('/');
+      if (!categoryMap.has(subCat)) {
+        categoryMap.set(subCat, { count: 0, latestPost: post });
+      }
+      const entry = categoryMap.get(subCat)!;
+      entry.count++;
+    }
+  } else {
+    if (!categoryMap.has(cat)) {
+      categoryMap.set(cat, { count: 0, latestPost: post });
+    }
+    const entry = categoryMap.get(cat)!;
+    entry.count++;
+  }
+}
+
+const categories = Array.from(categoryMap.entries())
+  .map(([name, info]) => ({
+    name,
+    displayName: name.split('/').pop()!,
+    count: info.count,
+  }))
+  .sort((a, b) => b.count - a.count);
+
+const totalPosts = allPosts.length;
+---
+
+<BlogLayout title="分类">
+  <header class="mb-10">
+    <p class="text-sm text-[var(--color-primary)] font-medium mb-2 tracking-wide uppercase">Categories</p>
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3">探索内容分类</h1>
+    <p class="text-[var(--color-text-secondary)]">
+      共 <span class="text-[var(--color-primary)] font-semibold">{categories.length}</span> 个分类，<span class="text-[var(--color-primary)] font-semibold">{totalPosts}</span> 篇文章
+    </p>
+  </header>
+
+  <div class="space-y-2">
+    {categories.map((cat, index) => (
+      <a
+        href={`/categories/${cat.name}`}
+        class="flex items-center gap-4 bg-[var(--color-card)] dark:bg-[var(--color-card)] rounded-xl border border-[var(--color-border)] p-4 group hover:bg-[var(--color-card-raised)] dark:hover:bg-[var(--color-card-raised)] hover:border-[var(--color-primary)]/15 transition-all duration-300"
+      >
+        <span class="text-sm font-mono text-[var(--color-text-quiet)] w-8 shrink-0">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div class="flex-1 min-w-0">
+          <h2 class="font-semibold text-[15px] group-hover:text-[var(--color-primary)] transition-colors">
+            {cat.displayName}
+          </h2>
+          {cat.name !== cat.displayName && (
+            <p class="text-xs text-[var(--color-text-quiet)] mt-0.5">{cat.name}</p>
+          )}
+        </div>
+        <span class="text-sm text-[var(--color-text-quiet)] shrink-0">
+          {cat.count} 篇
+        </span>
+        <svg class="w-4 h-4 text-[var(--color-text-quiet)] group-hover:text-[var(--color-primary)] transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    ))}
+  </div>
+</BlogLayout>

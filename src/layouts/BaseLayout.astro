@@ -1,0 +1,139 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { SITE_TITLE } from '@/consts';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SEO from '@/components/SEO.astro';
+import BackToTop from '@/components/BackToTop.astro';
+import Mermaid from '@/components/Mermaid.astro';
+import SmoothScroll from '@/components/SmoothScroll.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  ogType?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  ogType = 'website',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <SEO title={title} description={description} image={image} ogType={ogType} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#4b6bff" />
+    <script is:inline src="/assets/js/mermaid.min.js"></script>
+
+    <script is:inline>
+      (function() {
+        function getTheme() {
+          if (localStorage.theme === 'dark') return 'dark';
+          if (localStorage.theme === 'light') return 'light';
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+          var root = document.documentElement;
+          root.classList.toggle('dark', theme === 'dark');
+          root.dataset.theme = theme;
+        }
+
+        applyTheme(getTheme());
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+          if (!('theme' in localStorage)) {
+            applyTheme(getTheme());
+          }
+        });
+
+        document.addEventListener('astro:after-swap', function() {
+          applyTheme(getTheme());
+        });
+
+        window.__applyTheme = applyTheme;
+        window.__getTheme = getTheme;
+      })();
+    </script>
+
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <ClientRouter prefetch={{ limit: 0 }} />
+    <Header />
+    <main class="flex-1 pt-16">
+      <slot />
+    </main>
+    <Footer />
+    <BackToTop />
+    <Mermaid />
+    <SmoothScroll />
+    <ScrollReveal />
+
+    <script>
+      function initCodeBlocks() {
+        document.querySelectorAll('pre').forEach((pre) => {
+          if (pre.parentElement?.classList.contains('code-block-wrapper')) return;
+          if (pre.getAttribute('data-language') === 'mermaid') return;
+
+          const code = pre.querySelector('code');
+          const lang = code?.className.match(/language-(\w+)/)?.[1] || pre.getAttribute('data-language') || '';
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+          if (lang) wrapper.setAttribute('data-lang', lang);
+
+          pre.parentNode?.insertBefore(wrapper, pre);
+          wrapper.appendChild(pre);
+
+          if (lang) {
+            const langLabel = document.createElement('span');
+            langLabel.className = 'code-lang-label';
+            langLabel.textContent = lang;
+            wrapper.appendChild(langLabel);
+          }
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-btn';
+          copyBtn.title = '复制代码';
+          copyBtn.innerHTML =
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+
+          copyBtn.addEventListener('click', async () => {
+            const codeText = pre.querySelector('code')?.textContent || pre.textContent || '';
+            await navigator.clipboard.writeText(codeText);
+            copyBtn.classList.add('copied');
+            copyBtn.innerHTML =
+              '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(() => {
+              copyBtn.classList.remove('copied');
+              copyBtn.innerHTML =
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+
+          wrapper.appendChild(copyBtn);
+        });
+      }
+
+      initCodeBlocks();
+      document.addEventListener('astro:after-swap', initCodeBlocks);
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

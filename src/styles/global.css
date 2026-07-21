@@ -1,0 +1,353 @@
+@import 'tailwindcss';
+@import 'katex/dist/katex.min.css';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #4b6bff;
+  --color-primary-light: #7b94ff;
+  --color-primary-dark: #3a56e0;
+
+  --color-bg-light: #f2f5f9;
+  --color-bg-dark: #1a1a2e;
+  --color-card-light: #f7f9fc;
+  --color-card-dark: #1e2a45;
+
+  --font-family-sans: 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', system-ui, sans-serif;
+  --font-family-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+:root {
+  --color-text: #1f2937;
+  --color-text-secondary: rgba(0, 0, 0, 0.62);
+  --color-text-quiet: rgba(0, 0, 0, 0.48);
+  --color-bg: #f2f5f9;
+  --color-card: #f7f9fc;
+  --color-card-raised: #fbfcfe;
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-text-rgb: 31 41 55;
+  --color-text-secondary-rgb: 0 0 0;
+  --color-bg-rgb: 242 245 249;
+  --color-card-rgb: 247 249 252;
+  --color-border-rgb: 15 23 42;
+  --color-primary-rgb: 75 107 255;
+  --color-accent-wash: rgba(75, 107, 255, 0.06);
+  --theme-transition-radius: 120vmax;
+  color-scheme: light;
+}
+
+:root.dark {
+  --color-text: #e8e8e8;
+  --color-text-secondary: #999999;
+  --color-text-quiet: rgba(255, 255, 255, 0.45);
+  --color-bg: #1a1a2e;
+  --color-card: #1e2a45;
+  --color-card-raised: #243352;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-text-rgb: 232 232 232;
+  --color-text-secondary-rgb: 153 153 153;
+  --color-bg-rgb: 26 26 46;
+  --color-card-rgb: 30 42 69;
+  --color-border-rgb: 255 255 255;
+  --color-primary-rgb: 123 148 255;
+  --color-accent-wash: rgba(75, 107, 255, 0.10);
+  color-scheme: dark;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  @apply transition-colors duration-300;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-sans);
+  line-height: 1.75;
+}
+
+::selection {
+  background-color: rgba(75, 107, 255, 0.20);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-code: var(--color-primary);
+  --tw-prose-quotes: var(--color-text-secondary);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-counters: var(--color-text-secondary);
+  --tw-prose-bullets: var(--color-primary);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-pre-bg: #1e1e2e;
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+  max-width: none;
+}
+
+.dark .prose {
+  --tw-prose-code: var(--color-primary-light);
+}
+
+.prose :where(code):not(:where([class~='not-prose'] *)) {
+  font-weight: 500;
+}
+
+.prose :where(code):not(:where([class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'] *))::after {
+  content: '';
+}
+
+.prose pre {
+  @apply rounded-xl shadow-lg border border-gray-100 dark:border-gray-800;
+}
+
+/* Shiki dual themes: consume inline --shiki-dark variables in dark mode */
+.dark .astro-code {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg, transparent) !important;
+}
+
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+}
+
+.prose img {
+  @apply rounded-xl shadow-sm;
+}
+
+.prose a {
+  @apply no-underline font-medium transition-colors;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  @apply underline;
+}
+
+.prose h1 {
+  @apply text-2xl sm:text-3xl font-bold tracking-tight mt-10 mb-6;
+}
+
+.prose h2 {
+  @apply text-lg sm:text-xl font-semibold mt-10 mb-4 border-l-4 border-primary pl-4;
+}
+
+.prose h3 {
+  @apply text-base sm:text-lg font-semibold mt-8 mb-3 border-l-2 border-primary/30 pl-3;
+}
+
+.prose h4 {
+  @apply text-sm sm:text-base font-semibold mt-6 mb-2;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary/30 bg-gray-50 dark:bg-gray-800/30 rounded-r-lg;
+}
+
+.prose :is(table):not(:where([class~='not-prose'] *)) {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose :is(thead):not(:where([class~='not-prose'] *)) {
+  display: table-header-group;
+}
+
+.prose :is(tr):not(:where([class~='not-prose'] *)) {
+  display: table-row;
+}
+
+.prose :is(tbody):not(:where([class~='not-prose'] *)) {
+  display: table-row-group;
+}
+
+.prose :is(td, th):not(:where([class~='not-prose'] *)) {
+  display: table-cell;
+}
+
+.prose thead {
+  @apply bg-gray-50 dark:bg-gray-800/50;
+}
+
+.prose th {
+  @apply font-semibold;
+}
+
+.prose td,
+.prose th {
+  @apply px-4 py-2;
+}
+
+.prose ul > li::marker {
+  color: var(--color-primary);
+}
+
+.prose ol > li::marker {
+  color: var(--color-primary);
+}
+
+.prose hr {
+  @apply border-gray-200 dark:border-gray-700;
+}
+
+.card-hover {
+  @apply transition-all duration-300 ease-out;
+  will-change: transform, box-shadow;
+}
+
+.card-hover:hover {
+  @apply -translate-y-0.5;
+  box-shadow: 0 4px 20px rgba(75, 107, 255, 0.08);
+}
+
+.code-block-wrapper {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.code-block-wrapper .code-lang-label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.75rem;
+  font-size: 0.7rem;
+  font-family: var(--font-family-mono);
+  color: rgba(0, 0, 0, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dark .code-block-wrapper .code-lang-label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.code-block-wrapper .copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.dark .code-block-wrapper .copy-btn {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.code-block-wrapper:hover .copy-btn {
+  opacity: 1;
+}
+
+.code-block-wrapper .copy-btn:hover {
+  color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.dark .code-block-wrapper .copy-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.code-block-wrapper .copy-btn.copied {
+  color: #16a34a;
+  opacity: 1;
+}
+
+.dark .code-block-wrapper .copy-btn.copied {
+  color: #4ade80;
+}
+
+.code-block-wrapper pre {
+  counter-reset: line;
+}
+
+.code-block-wrapper pre code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 0.85em;
+}
+
+.dark .code-block-wrapper pre code .line::before {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+/* Scroll reveal animations */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Theme transition sync */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: background-color 0.6s ease,
+              color 0.6s ease,
+              border-color 0.6s ease,
+              box-shadow 0.6s ease,
+              fill 0.6s ease,
+              stroke 0.6s ease !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+

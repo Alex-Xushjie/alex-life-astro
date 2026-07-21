@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FilterRail from '@/components/FilterRail.astro';
+import SidebarDrawer from '@/components/SidebarDrawer.astro';
+import Hero from '@/components/Hero.astro';
+import PostList from '@/components/PostList.astro';
+import { resolveCover } from '@/pages/_imageStore';
+
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const postData = sorted.map((p) => ({
+  ...p,
+  slug: p.id,
+  data: {
+    ...p.data,
+    cover: resolveCover('blog', p.id, p.data.cover),
+  },
+}));
+---
+
+<BaseLayout>
+  <Hero />
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-6 py-8">
+      <aside class="hidden lg:block w-full lg:w-64 shrink-0 order-first">
+        <div class="sticky top-20">
+          <FilterRail />
+        </div>
+      </aside>
+
+      <div class="flex-1 min-w-0">
+        <PostList posts={postData} showPinned />
+      </div>
+    </div>
+  </div>
+
+  <SidebarDrawer />
+</BaseLayout>

@@ -1,0 +1,191 @@
+---
+import {getCollection} from 'astro:content';
+import {SITE_TITLE, SITE_DESCRIPTION, NAV_ITEMS, SITE_AUTHOR, SOCIAL_LINKS} from '@/consts';
+import {getWordCount} from '@/utils/readingTime';
+
+const allBlogPosts = await getCollection('blog');
+const totalArticles = allBlogPosts.length;
+
+let totalWords = 0;
+for (const post of allBlogPosts) {
+  totalWords += getWordCount(post.body || '');
+}
+
+const currentYear = new Date().getFullYear();
+const startYear = 2026;
+
+const marqueeItems = [
+  ...NAV_ITEMS,
+  { label: `${Math.round(totalWords / 1000)}k 字`, href: '#' },
+  { label: `${totalArticles} 篇文章`, href: '#' },
+  { label: 'Astro', href: 'https://astro.build' },
+  { label: 'Tailwind CSS', href: 'https://tailwindcss.com' },
+];
+---
+
+<footer class="border-t border-[var(--color-border)] mt-16 overflow-hidden">
+  <div class="marquee-track py-4 border-b border-[var(--color-border)]">
+    <div class="marquee-content">
+      {[...marqueeItems, ...marqueeItems].map((item) => (
+        <a
+          href={item.href}
+          class="marquee-item shrink-0 px-6 text-sm text-[var(--color-text-quiet)] hover:text-[var(--color-primary)] transition-colors whitespace-nowrap"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div>
+        <a href="/" class="text-lg font-bold text-[var(--color-primary)] hover:opacity-80 transition-opacity">
+          {SITE_TITLE}
+        </a>
+        <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+          {SITE_DESCRIPTION}
+        </p>
+        <div class="flex items-center gap-3 mt-4">
+          <span class="text-xs text-[var(--color-text-quiet)]">
+            {totalArticles} 篇文章 · {Math.round(totalWords / 1000)}k 字
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-4">导航</h3>
+        <ul class="space-y-2.5">
+          {NAV_ITEMS.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-4">社交</h3>
+        <ul class="space-y-2.5">
+          {SOCIAL_LINKS.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/rss.xml"
+              class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+            >
+              RSS
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--color-border)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--color-text-quiet)]">
+      <span>&copy; {startYear}{currentYear > startYear ? ` - ${currentYear}` : ''} {SITE_AUTHOR}</span>
+      <span>
+        Powered by <a href="https://astro.build" class="text-[var(--color-primary)] hover:underline">Astro</a> & <a href="https://tailwindcss.com/" class="text-[var(--color-primary)] hover:underline">Tailwind CSS</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .marquee-track {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee-content {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 30s linear infinite;
+  }
+
+  .marquee-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .marquee-item::after {
+    content: '·';
+    position: absolute;
+    right: -4px;
+    color: var(--color-text-secondary);
+    opacity: 0.3;
+  }
+
+  .marquee-item:last-child::after {
+    content: '';
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  function initMarquee() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const track = document.querySelector('.marquee-track');
+    const content = document.querySelector('.marquee-content');
+    if (!track || !content) return;
+
+    const marqueeTl = gsap.to(content, {
+      x: '-50%',
+      duration: 30,
+      ease: 'none',
+      repeat: -1,
+    });
+
+    ScrollTrigger.create({
+      trigger: track,
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate: (self) => {
+        const velocity = Math.abs(self.getVelocity());
+        const timeScale = velocity > 100 ? Math.max(0.5, 1 + velocity / 5000) : 1;
+        marqueeTl.timeScale(timeScale);
+      },
+    });
+  }
+
+  initMarquee();
+  document.addEventListener('astro:after-swap', () => {
+    setTimeout(initMarquee, 100);
+  });
+</script>
