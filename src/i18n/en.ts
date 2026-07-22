@@ -1,7 +1,6 @@
 export default {
   nav: {
     home: 'Home',
-    weekly: 'Weekly',
     archives: 'Archives',
     friends: 'Friends',
     about: 'About',

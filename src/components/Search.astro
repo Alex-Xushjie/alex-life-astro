@@ -98,14 +98,14 @@
     results.innerHTML = filtered.map((item: any) => {
       const snippet = buildSnippet(item, terms);
       return `
-      <a href="${item.type === 'weekly' ? '/weekly/' : '/post/'}${item.slug}" class="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-[var(--color-accent-wash)] transition-colors group">
+      <a href="/post/${item.slug}" class="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-[var(--color-accent-wash)] transition-colors group">
         <div class="flex-1 min-w-0">
           <div class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors line-clamp-1">${highlight(item.title, highlightRe)}</div>
           ${snippet ? `<div class="text-xs text-[var(--color-text-quiet)] mt-0.5 line-clamp-2">${highlight(snippet, highlightRe)}</div>` : ''}
           <div class="flex items-center gap-2 mt-0.5">
             ${item.category ? `<span class="text-xs text-[var(--color-primary)]/70">${escapeHtml(item.category)}</span>` : ''}
             ${item.category ? '<span class="w-px h-2.5 bg-[var(--color-border)]"></span>' : ''}
-            <span class="text-xs text-[var(--color-text-quiet)]">${item.type === 'weekly' ? '周刊' : '博客'}</span>
+            <span class="text-xs text-[var(--color-text-quiet)]">博客</span>
           </div>
         </div>
         <svg class="w-4 h-4 text-[var(--color-text-quiet)] shrink-0 mt-1 group-hover:text-[var(--color-primary)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

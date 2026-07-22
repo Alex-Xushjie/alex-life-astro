@@ -19,10 +19,8 @@ function stripMarkdown(raw: string): string {
 
 export async function GET() {
   const blogPosts = await getCollection('blog');
-  const weeklyPosts = await getCollection('weekly');
 
-  const entries = [
-    ...blogPosts.map((p) => ({
+  const entries = blogPosts.map((p) => ({
       title: p.data.title,
       description: p.data.description || '',
       category: p.data.category || '',
@@ -31,18 +29,7 @@ export async function GET() {
       type: 'blog',
       date: p.data.date.toISOString(),
       body: stripMarkdown(p.body || '').slice(0, 400),
-    })),
-    ...weeklyPosts.map((p) => ({
-      title: p.data.title,
-      description: p.data.description || '',
-      category: '周刊',
-      tags: p.data.tags || [],
-      slug: p.id,
-      type: 'weekly',
-      date: p.data.date.toISOString(),
-      body: stripMarkdown(p.body || '').slice(0, 400),
-    })),
-  ];
+    }));
 
   return new Response(JSON.stringify(entries), {
     headers: { 'Content-Type': 'application/json' },

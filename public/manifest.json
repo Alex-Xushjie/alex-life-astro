@@ -1,16 +1,16 @@
 {
   "name": "Alex's Life",
   "short_name": "Alex's Life",
-  "description": "一个基于 Astro 的现代化博客主题",
+  "description": "Bridging the digital world, exploring the deep blue.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f5f5",
   "theme_color": "#e9536a",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/images/avatar.png",
+      "sizes": "974x965",
+      "type": "image/png"
     }
   ]
 }

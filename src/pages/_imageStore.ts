@@ -5,11 +5,6 @@ const blogRaw = import.meta.glob<{ default: any }>('../content/blog/**/*.{png,jp
   query: '?url',
 });
 
-const weeklyRaw = import.meta.glob<{ default: any }>('../content/weekly/**/*.{png,jpg,jpeg,gif,webp,svg}', {
-  eager: true,
-  query: '?url',
-});
-
 const imageMap: Record<string, string> = {};
 
 function buildMap(glob: typeof blogRaw) {
@@ -25,7 +20,6 @@ function buildMap(glob: typeof blogRaw) {
 }
 
 buildMap(blogRaw);
-buildMap(weeklyRaw);
 
 export function resolveCover(collection: string, entryId: string, cover?: string): string | undefined {
   if (!cover) return undefined;

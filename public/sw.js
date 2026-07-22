@@ -1,6 +1,6 @@
-const CACHE_NAME = 'sify-blog-v2';
+const CACHE_NAME = 'alex-life-v1';
 const STATIC_ASSETS = [
-  '/favicon.svg',
+  '/images/avatar.png',
 ];
 
 self.addEventListener('install', (event) => {

@@ -145,7 +145,7 @@ const {
             const cacheNames = await caches.keys();
             await Promise.all(
               cacheNames
-                .filter((cacheName) => cacheName.startsWith('sify-blog-'))
+                .filter((cacheName) => cacheName.startsWith('alex-life-'))
                 .map((cacheName) => caches.delete(cacheName)),
             );
           }

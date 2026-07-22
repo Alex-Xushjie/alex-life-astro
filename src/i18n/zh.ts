@@ -1,7 +1,6 @@
 export default {
   nav: {
     home: '首页',
-    weekly: '周刊',
     archives: '文章',
     friends: '友链',
     about: '关于',

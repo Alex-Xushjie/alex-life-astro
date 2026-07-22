@@ -1,7 +1,7 @@
 {
-  "name": "astro-theme-sify",
+  "name": "alex-life-astro",
   "version": "1.0.0",
-  "description": "A blog theme built with Astro and Tailwind CSS",
+  "description": "Alex's personal blog built with Astro and Tailwind CSS",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -9,7 +9,7 @@
     "preview": "astro preview"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alex XU",
   "license": "ISC",
   "dependencies": {
     "@astrojs/mdx": "^6.0.0",
