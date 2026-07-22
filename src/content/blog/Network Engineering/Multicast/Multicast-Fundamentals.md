@@ -3,8 +3,6 @@ title: "Multicast Fundamentals: How One Packet Reaches Multiple Receivers"
 description: "This article introduces the complete multicast landscape at a high level."
 date: 2026-07-19
 category: "Network Engineering"
-categories:
-  - "Network Engineering11111"
 cover: /images/Multicast_Series.webp
 tags:
   - Multicast
