@@ -3,7 +3,7 @@ title: Multicast Fundamentals: How One Packet Reaches Multiple Receivers
 description: This article introduces the complete multicast landscape at a high level. The protocols and mechanisms mentioned here will be explored individually in later articles.
 date: 2026-07-19
 category: "Network Engineering"
-cover : "./images/Multicast_Series.webp"
+cover: "./images/Multicast_Series.webp"
 tags: [Multicast, IGMP, IGMP Snooping, PIM, ASM, SSM, Market Data]
 series: Multicast
 pinned: false
