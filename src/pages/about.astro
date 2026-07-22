@@ -3,30 +3,45 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { SITE_AUTHOR } from '@/consts';
 ---
 
-<BaseLayout title="关于">
+<BaseLayout title="About">
   <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-8">
     <header class="mb-10">
       <p class="text-sm text-[var(--color-primary)] font-medium mb-2 tracking-wide uppercase">About</p>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-3">关于</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-3">About Me</h1>
       <p class="text-[var(--color-text-secondary)]">
-        你好，我是 {SITE_AUTHOR}
+        Network Engineer | Diver | Tech & Life Blogger
       </p>
     </header>
+
     <article class="prose max-w-none">
+      <p>Hello everyone! I’d like to start with a short introduction.</p>
+
+      <h2>👨‍💻 Professional Background</h2>
       <p>
-        这里会记录我的学习笔记、技术分享和生活随笔。希望你能在这里找到有用的内容。
+        My name is Alex, and I work as a network engineer. I earned my CCIE certification in 2015, and I have been working in the networking field for nearly ten years.
       </p>
-      <h2>关于本站</h2>
-      <ul>
-        <li>框架：<a href="https://astro.build">Astro</a></li>
-        <li>样式：Tailwind CSS</li>
-        <li>部署：静态站点</li>
-      </ul>
-      <h2>联系</h2>
-      <p>如有任何问题或建议，欢迎通过以下方式联系：</p>
-      <ul>
-        <li><a href="https://github.com/santisify">GitHub</a></li>
-      </ul>
+
+      <h2>🤿 Life & Hobbies</h2>
+      <p>
+        Outside of work, I am an active diver. I hold a <strong>PADI Advanced Open Water (AOW)</strong> certification and an <strong>AIDA 2</strong> freediving certification. I believe I am a reliable and safety-conscious dive buddy, so feel free to reach out if you’re looking for someone to dive with!
+      </p>
+      <p>
+        I enjoy meeting new people and hope to make friends from all over the world. I would love to hear different stories, learn about different cultures, and experience different ways of life.
+      </p>
+
+      <h2>✍️ Why This Blog?</h2>
+      <p>
+        English is an important skill for me, both professionally and personally. However, I have never felt entirely confident in it. That is why I decided to build this blog and write in English regularly—I hope this habit will help me improve step by step.
+      </p>
+
+      <p>
+        The main purpose of this blog is to document my daily life and share technical notes. If I can also connect with new friends through this space, that would be amazing!
+      </p>
+
+      <h2>📫 Get in Touch</h2>
+      <p>
+        If you would like to share your thoughts, discuss tech, or just say hi, feel free to leave a comment or send me an email. I promise I will read and reply to every single message!
+      </p>
     </article>
   </div>
 </BaseLayout>
