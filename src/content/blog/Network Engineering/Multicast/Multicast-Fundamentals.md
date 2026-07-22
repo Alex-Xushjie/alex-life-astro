@@ -4,7 +4,7 @@ description: "This article introduces the complete multicast landscape at a high
 date: 2026-07-19
 category: "Network Engineering"
 categories:
-  - "Network Engineering"
+  - "Network Engineering11111"
 cover: /images/Multicast_Series.webp
 tags:
   - Multicast
