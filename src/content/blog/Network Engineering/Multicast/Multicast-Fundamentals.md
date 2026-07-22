@@ -5,7 +5,7 @@ date: 2026-07-19
 category: "Network Engineering"
 categories:
   - "Network Engineering"
-cover: ./images/Multicast_Series.webp
+cover: /images/Multicast_Series.webp
 tags:
   - Multicast
   - IGMP
