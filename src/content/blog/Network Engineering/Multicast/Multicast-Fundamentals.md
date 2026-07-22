@@ -1,16 +1,13 @@
 ---
-title: "Multicast Fundamentals: How One Packet Reaches Multiple Receivers"
+title: Multicast Fundamentals: How One Packet Reaches Multiple Receivers
+description: This article introduces the complete multicast landscape at a high level. The protocols and mechanisms mentioned here will be explored individually in later articles.
 date: 2026-07-19
-categories:
-  - Network Engineering
-tags:
-  - Multicast
-  - IGMP
-  - IGMP Snooping
-  - PIM
-  - ASM
-  - SSM
-  - Market Data
+category: Network Engineering
+cover : ./images/Multicast_Series.webp
+tags: [Multicast, IGMP, IGMP Snooping, PIM, ASM, SSM, Market Data]
+series: Multicast
+pinned: false
+draft: false
 ---
 
 # Multicast Fundamentals: How One Packet Reaches Multiple Receivers
@@ -714,7 +711,7 @@ The lab verifies:
          Source  Receiver A Receiver B
 ```
 
-![Multicast lab topology](./images/lab-topology.png)
+![Multicast lab topology](./images/lab-topology.webp)
 
 All three hosts are placed in VLAN 10.
 
@@ -886,7 +883,7 @@ sequence=42, source=192.168.10.10
 
 Capture the Source-to-SW1 link and the SW1-to-Receiver links with Wireshark.
 
-![Multicast packet capture](./images/multicast_cap.png)
+![Multicast packet capture](./images/multicast_cap.webp)
 
 The packet contains normal protocol encapsulation:
 
