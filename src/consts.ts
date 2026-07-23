@@ -1,4 +1,4 @@
-export const SITE_TITLE = "Alex's Life";
+﻿export const SITE_TITLE = "Alex's Life";
 export const SITE_DESCRIPTION = 'Bridging the digital world, exploring the deep blue.';
 export const SITE_AUTHOR = 'Alex XU';
 export const SITE_ROLE = 'Network Engineer & Diver';
@@ -17,10 +17,10 @@ export const NAV_ITEMS = [
 
 export const SOCIAL_LINKS = [
   { name: 'GitHub', href: 'https://github.com/Alex-Xushjie', icon: 'github' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/alex-xu-308148211', icon: 'linkedin' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/shengjie-xu-308148211', icon: 'linkedin' },
   { name: 'RSS', href: '/rss.xml', icon: 'rss' },
 ];
 
 export const npmCDN = '';
-export const walineServer = '';//已添加安全域名，若有需要，自行部署
-export const friendCircleServer = '';//已添加安全域名，若有需要，自行部署
+export const walineServer = '';//宸叉坊鍔犲畨鍏ㄥ煙鍚嶏紝鑻ユ湁闇€瑕侊紝鑷閮ㄧ讲
+export const friendCircleServer = '';//宸叉坊鍔犲畨鍏ㄥ煙鍚嶏紝鑻ユ湁闇€瑕侊紝鑷閮ㄧ讲
