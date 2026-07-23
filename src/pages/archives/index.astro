@@ -21,12 +21,12 @@ const categories = new Set(allPosts.map(p => p.data.category).filter(Boolean)).s
 const tags = new Set(allPosts.flatMap(p => p.data.tags || [])).size;
 ---
 
-<BlogLayout title="归档">
+<BlogLayout title="Archives">
   <header class="mb-10">
     <p class="text-sm text-[var(--color-primary)] font-medium mb-2 tracking-wide uppercase">Archives</p>
-    <h1 class="text-3xl sm:text-4xl font-bold mb-3">文章归档</h1>
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3">Article Archives</h1>
     <p class="text-[var(--color-text-secondary)]">
-      共 <span class="text-[var(--color-primary)] font-semibold">{totalPosts}</span> 篇文章，<span class="text-[var(--color-primary)] font-semibold">{categories}</span> 个分类，<span class="text-[var(--color-primary)] font-semibold">{tags}</span> 个标签
+      Total <span class="text-[var(--color-primary)] font-semibold">{totalPosts}</span> posts across <span class="text-[var(--color-primary)] font-semibold">{categories}</span> categories and <span class="text-[var(--color-primary)] font-semibold">{tags}</span> tags.
     </p>
   </header>
   <PostList posts={postData} />

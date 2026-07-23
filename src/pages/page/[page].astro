@@ -34,9 +34,9 @@ const postData = paginatedPosts.map((p) => ({
 }));
 ---
 
-<BlogLayout title={`第 ${currentPage} 页`}>
+<BlogLayout title={`Page ${currentPage}`}>
   <h1 class="text-2xl font-bold mb-6 text-[var(--color-text)]">
-    第 {currentPage} 页
+    Page {currentPage}
   </h1>
   <PostList posts={postData} />
   <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/" />

@@ -76,13 +76,13 @@ const stats = data?.statistical_data;
 const articles = data?.article_data || [];
 ---
 
-<BaseLayout title="友链">
+<BaseLayout title="Friends">
   <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
     <header class="mb-10">
       <p class="text-sm text-[var(--color-primary)] font-medium mb-2 tracking-wide uppercase">Friends</p>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-3">友情链接</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-3">Friend Links</h1>
       <p class="text-[var(--color-text-secondary)]">
-        友情链接 &amp; 友链圈最新文章动态
+        Friends and their latest posts
       </p>
     </header>
 
@@ -91,7 +91,7 @@ const articles = data?.article_data || [];
         <div class="mb-8">
           <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
             <span class="w-1 h-5 bg-[var(--color-primary)] rounded-full inline-block"></span>
-            我的朋友们
+            My Friends
           </h2>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {friendList.map((friend) => (
@@ -132,7 +132,7 @@ const articles = data?.article_data || [];
         <div class="mb-8">
           <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
             <span class="w-1 h-5 bg-[var(--color-primary)] rounded-full inline-block"></span>
-            特别推荐
+            Special Picks
           </h2>
           <div class="grid grid-cols-2 gap-3">
             {specialList.map((item) => (
@@ -169,8 +169,8 @@ const articles = data?.article_data || [];
     {
       fetchError && (
         <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6 text-center text-amber-700 dark:text-amber-400 mb-8">
-          <p class="font-semibold">无法连接到友链后端</p>
-          <p class="text-sm mt-1">后端地址：{API_URL}</p>
+          <p class="font-semibold">Unable to connect to the friend-links service</p>
+          <p class="text-sm mt-1">Service URL: {API_URL}</p>
         </div>
       )
     }
@@ -180,24 +180,24 @@ const articles = data?.article_data || [];
         <>
           <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
             <span class="w-1 h-5 bg-[var(--color-primary)] rounded-full inline-block"></span>
-            友链圈动态
+            Friend Activity
           </h2>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           <div class="bg-[var(--color-card)] dark:bg-[var(--color-card)] rounded-xl border border-[var(--color-border)] p-4 text-center">
             <div class="text-2xl font-bold text-[var(--color-primary)]">{stats.friends_num}</div>
-            <div class="text-xs text-[var(--color-text-quiet)] mt-1">友链总数</div>
+            <div class="text-xs text-[var(--color-text-quiet)] mt-1">Total Friends</div>
           </div>
           <div class="bg-[var(--color-card)] dark:bg-[var(--color-card)] rounded-xl border border-[var(--color-border)] p-4 text-center">
             <div class="text-2xl font-bold text-[var(--color-primary)]">{stats.active_num}</div>
-            <div class="text-xs text-[var(--color-text-quiet)] mt-1">活跃友链</div>
+            <div class="text-xs text-[var(--color-text-quiet)] mt-1">Active Friends</div>
           </div>
           <div class="bg-[var(--color-card)] dark:bg-[var(--color-card)] rounded-xl border border-[var(--color-border)] p-4 text-center">
             <div class="text-2xl font-bold text-[var(--color-primary)]">{stats.article_num}</div>
-            <div class="text-xs text-[var(--color-text-quiet)] mt-1">文章总数</div>
+            <div class="text-xs text-[var(--color-text-quiet)] mt-1">Total Articles</div>
           </div>
           <div class="bg-[var(--color-card)] dark:bg-[var(--color-card)] rounded-xl border border-[var(--color-border)] p-4 text-center">
             <div class="text-sm font-semibold text-[var(--color-text-secondary)] mt-1">{stats.last_updated_time}</div>
-            <div class="text-xs text-[var(--color-text-quiet)] mt-1">最后更新</div>
+            <div class="text-xs text-[var(--color-text-quiet)] mt-1">Last Updated</div>
           </div>
           </div>
         </>
@@ -245,7 +245,7 @@ const articles = data?.article_data || [];
     {
       !fetchError && !stats && (
         <div class="text-center py-12 text-[var(--color-text-quiet)]">
-          <p>暂无友链数据</p>
+          <p>No friend links yet</p>
         </div>
       )
     }

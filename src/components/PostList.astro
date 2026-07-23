@@ -34,7 +34,7 @@ const normalPosts = posts.filter((p) => !p.data.pinned);
     <section class="mb-10">
       <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
         <span class="w-1 h-5 bg-[var(--color-primary)] rounded-full inline-block"></span>
-        置顶文章
+        Pinned Posts
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {pinnedPosts.map((post) => (
@@ -62,13 +62,13 @@ const normalPosts = posts.filter((p) => !p.data.pinned);
       {!showPinned && pinnedPosts.length === 0 && (
         <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
           <span class="w-1 h-5 bg-[var(--color-primary)] rounded-full inline-block"></span>
-          文章列表
+          Articles
         </h2>
       )}
       {showPinned && normalPosts.length > 0 && (
         <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
           <span class="w-1 h-5 bg-[var(--color-primary)] rounded-full inline-block"></span>
-          文章列表
+          Articles
         </h2>
       )}
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

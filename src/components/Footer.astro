@@ -16,8 +16,8 @@ const startYear = 2026;
 
 const marqueeItems = [
   ...NAV_ITEMS,
-  { label: `${Math.round(totalWords / 1000)}k 字`, href: '#' },
-  { label: `${totalArticles} 篇文章`, href: '#' },
+  { label: `${Math.round(totalWords / 1000)}k words`, href: '#' },
+  { label: `${totalArticles} articles`, href: '#' },
   { label: 'Astro', href: 'https://astro.build' },
   { label: 'Tailwind CSS', href: 'https://tailwindcss.com' },
 ];
@@ -48,13 +48,13 @@ const marqueeItems = [
         </p>
         <div class="flex items-center gap-3 mt-4">
           <span class="text-xs text-[var(--color-text-quiet)]">
-            {totalArticles} 篇文章 · {Math.round(totalWords / 1000)}k 字
+            {totalArticles} articles · {Math.round(totalWords / 1000)}k words
           </span>
         </div>
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-4">导航</h3>
+        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-4">Navigation</h3>
         <ul class="space-y-2.5">
           {NAV_ITEMS.map((item) => (
             <li>
@@ -70,7 +70,7 @@ const marqueeItems = [
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-4">社交</h3>
+        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-4">Social</h3>
         <ul class="space-y-2.5">
           {SOCIAL_LINKS.map((link) => (
             <li>

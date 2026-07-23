@@ -151,12 +151,12 @@ function formatDate(d: Date) {
         <button
           id="mobile-toc-trigger"
           class="lg:hidden fixed bottom-20 left-4 z-40 flex items-center gap-1.5 px-3 py-2.5 bg-[var(--color-card)] dark:bg-[var(--color-card)] text-[var(--color-primary)] rounded-full shadow-lg border border-[var(--color-border)] text-sm font-medium transition-all hover:shadow-xl"
-          aria-label="打开目录"
+          aria-label="Open table of contents"
         >
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
           </svg>
-          目录
+          Table of Contents
         </button>
 
         <div
@@ -168,11 +168,11 @@ function formatDate(d: Date) {
           <div id="mobile-toc-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"></div>
           <div id="mobile-toc-panel" class="absolute bottom-0 left-0 right-0 max-h-[70vh] bg-[var(--color-bg)] dark:bg-[var(--color-bg)] rounded-t-2xl shadow-2xl transform translate-y-full transition-transform duration-300 overflow-hidden flex flex-col border-t border-[var(--color-border)]">
             <div class="flex items-center justify-between px-5 py-3 border-b border-[var(--color-border)] shrink-0">
-              <h2 class="text-sm font-semibold text-[var(--color-text)]">目录</h2>
+              <h2 class="text-sm font-semibold text-[var(--color-text)]">Table of Contents</h2>
               <button
                 id="mobile-toc-close"
                 class="p-2 -mr-2 rounded-lg text-[var(--color-text-quiet)] hover:text-[var(--color-text)] hover:bg-[var(--color-accent-wash)] transition-colors"
-                aria-label="关闭目录"
+                aria-label="Close table of contents"
               >
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

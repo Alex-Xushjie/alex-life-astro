@@ -90,12 +90,12 @@ function slugify(post: (typeof sorted)[0]) {
     <div class="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/50">
       <a href="/archives" class="text-center group">
         <div class="font-semibold text-sm group-hover:text-primary transition-colors">{totalPosts}</div>
-        <div class="text-[10px] text-gray-400 uppercase tracking-wider">文章</div>
+        <div class="text-[10px] text-gray-400 uppercase tracking-wider">Posts</div>
       </a>
       <div class="w-px h-6 bg-gray-100 dark:bg-gray-800/50"></div>
       <a href="/archives" class="text-center group">
         <div class="font-semibold text-sm group-hover:text-primary transition-colors">{Math.round(totalWords / 1000)}k</div>
-        <div class="text-[10px] text-gray-400 uppercase tracking-wider">字数</div>
+        <div class="text-[10px] text-gray-400 uppercase tracking-wider">Words</div>
       </a>
     </div>
   </div>
@@ -106,7 +106,7 @@ function slugify(post: (typeof sorted)[0]) {
         data-sidebar-section="categories"
       >
         <h2 class="text-xs font-semibold mb-3 text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-          分类
+          Categories
         </h2>
         <div class="sidebar-expand-list flex flex-wrap gap-2">
           {allCategories.map(([name, info], i) => (
@@ -128,7 +128,7 @@ function slugify(post: (typeof sorted)[0]) {
               class="sidebar-toggle-btn mt-3 text-xs text-primary hover:underline"
               data-expanded="false"
             >
-              显示全部 ({allCategories.length})
+              Show All ({allCategories.length})
             </button>
           )
         }
@@ -142,7 +142,7 @@ function slugify(post: (typeof sorted)[0]) {
         data-sidebar-section="tags"
       >
         <h2 class="text-xs font-semibold mb-3 text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-          标签
+          Tags
         </h2>
         <div class="sidebar-expand-list flex flex-wrap gap-2">
           {allTags.map(([tag, count], i) => (
@@ -164,7 +164,7 @@ function slugify(post: (typeof sorted)[0]) {
               class="sidebar-toggle-btn mt-3 text-xs text-primary hover:underline"
               data-expanded="false"
             >
-              显示全部 ({allTags.length})
+              Show All ({allTags.length})
             </button>
           )
         }
@@ -176,7 +176,7 @@ function slugify(post: (typeof sorted)[0]) {
     randomPosts.length > 0 && (
       <div class="bg-white dark:bg-[var(--color-card-dark)] rounded-2xl shadow-sm p-5 border border-gray-100/50 dark:border-white/[0.05]">
         <h2 class="text-xs font-semibold mb-4 text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-          随机推荐
+          Random Picks
         </h2>
         <div class="space-y-2">
           {randomPosts.map((post) => (
@@ -210,7 +210,7 @@ function slugify(post: (typeof sorted)[0]) {
         const expanded = btn.dataset.expanded === 'true';
         extraItems.forEach((el) => el.classList.toggle('hidden', expanded));
         btn.dataset.expanded = String(!expanded);
-        btn.textContent = expanded ? label : '收起';
+        btn.textContent = expanded ? label : 'Collapse';
       });
     });
   }

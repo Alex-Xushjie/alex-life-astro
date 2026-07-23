@@ -8,10 +8,10 @@ export const SITE_COVER = '/images/background.jpg';
 export const PAGE_SIZE = 10;
 
 export const NAV_ITEMS = [
-  { label: '首页', href: '/' },
-  { label: '文章', href: '/archives' },
-  { label: '友链', href: '/friends' },
-  { label: '关于', href: '/about' },
+  { label: 'Home', href: '/' },
+  { label: 'Archives', href: '/archives' },
+  { label: 'Friends', href: '/friends' },
+  { label: 'About', href: '/about' },
 ];
 
 export const SOCIAL_LINKS = [

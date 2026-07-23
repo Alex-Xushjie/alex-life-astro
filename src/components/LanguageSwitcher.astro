@@ -4,10 +4,10 @@
 <button
   id="lang-toggle"
   class="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm font-medium"
-  aria-label="切换语言"
+  aria-label="Switch language"
 >
-  <span class="lang-zh">中</span>
-  <span class="lang-en hidden">EN</span>
+  <span class="lang-zh hidden"></span>
+  <span class="lang-en">EN</span>
 </button>
 
 <script is:inline>
@@ -17,9 +17,11 @@
       if (!btn) return;
 
       function updateLabel() {
-        var locale = localStorage.getItem('locale') || 'zh';
+        var locale = localStorage.getItem('locale') || 'en';
         var zhLabel = btn.querySelector('.lang-zh');
         var enLabel = btn.querySelector('.lang-en');
+        if (zhLabel) zhLabel.textContent = '中文';
+        if (enLabel) enLabel.textContent = 'EN';
         if (locale === 'en') {
           zhLabel?.classList.add('hidden');
           enLabel?.classList.remove('hidden');
@@ -30,7 +32,7 @@
       }
 
       btn.addEventListener('click', function() {
-        var current = localStorage.getItem('locale') || 'zh';
+        var current = localStorage.getItem('locale') || 'en';
         var next = current === 'zh' ? 'en' : 'zh';
         localStorage.setItem('locale', next);
         updateLabel();

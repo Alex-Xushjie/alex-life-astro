@@ -63,7 +63,7 @@ const allTags = Array.from(tagMap.entries()).sort((a, b) => b[1] - a[1]);
   {allCategories.length > 0 && (
     <div class="bg-white/80 dark:bg-[var(--color-card)] backdrop-blur-sm rounded-xl p-4 border border-[var(--color-border)]">
       <h2 class="text-xs font-medium text-[var(--color-text-quiet)] uppercase tracking-widest mb-3">
-        分类
+        Categories
       </h2>
       <div class="flex flex-wrap gap-2">
         {allCategories.map(([name, count]) => (
@@ -82,7 +82,7 @@ const allTags = Array.from(tagMap.entries()).sort((a, b) => b[1] - a[1]);
   {allTags.length > 0 && (
     <div class="bg-white/80 dark:bg-[var(--color-card)] backdrop-blur-sm rounded-xl p-4 border border-[var(--color-border)]">
       <h2 class="text-xs font-medium text-[var(--color-text-quiet)] uppercase tracking-widest mb-3">
-        标签
+        Tags
       </h2>
       <div class="flex flex-wrap gap-2">
         {allTags.slice(0, 20).map(([tag, count]) => (

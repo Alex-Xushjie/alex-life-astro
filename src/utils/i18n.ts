@@ -6,8 +6,8 @@ export type Locale = 'zh' | 'en';
 const locales: Record<Locale, typeof zh> = { zh, en };
 
 export function getLocale(lang?: string): Locale {
-  if (lang === 'en') return 'en';
-  return 'zh';
+  if (lang === 'zh') return 'zh';
+  return 'en';
 }
 
 export function t(locale: Locale) {
@@ -21,5 +21,5 @@ export function detectLocale(): Locale {
     const browserLang = navigator.language;
     if (browserLang.startsWith('en')) return 'en';
   }
-  return 'zh';
+  return 'en';
 }

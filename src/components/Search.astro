@@ -9,11 +9,11 @@
         <input
           id="search-input"
           type="text"
-          placeholder="搜索文章..."
+          placeholder="Search articles..."
           class="flex-1 bg-transparent border-none outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-quiet)]"
           autocomplete="off"
         />
-        <button id="search-close" class="flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-[var(--color-text-quiet)] hover:text-[var(--color-text)] transition-colors" aria-label="关闭搜索">
+        <button id="search-close" class="flex items-center justify-center w-11 h-11 -mr-2 rounded-lg text-[var(--color-text-quiet)] hover:text-[var(--color-text)] transition-colors" aria-label="Close search">
           <kbd class="text-[10px] font-medium text-[var(--color-text-quiet)] bg-[var(--color-bg)] px-1.5 py-0.5 rounded mr-1">esc</kbd>
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -21,7 +21,7 @@
         </button>
       </div>
       <div id="search-results" class="max-h-80 overflow-y-auto p-2">
-        <div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">输入关键词搜索文章</div>
+        <div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">Enter keywords to search articles</div>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
     const input = document.getElementById('search-input') as HTMLInputElement;
     if (input) input.value = '';
     const results = document.getElementById('search-results');
-    if (results) results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">输入关键词搜索文章</div>';
+    if (results) results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">Enter keywords to search articles</div>';
   }
 
   function search(query: string) {
@@ -71,12 +71,12 @@
     if (!results) return;
 
     if (!index) {
-      results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">加载中...</div>';
+      results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">Loading...</div>';
       return;
     }
 
     if (!query.trim()) {
-      results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">输入关键词搜索文章</div>';
+      results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">Enter keywords to search articles</div>';
       return;
     }
 
@@ -89,7 +89,7 @@
     }).slice(0, 20);
 
     if (filtered.length === 0) {
-      results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">没有找到结果</div>';
+      results.innerHTML = '<div class="px-3 py-8 text-center text-sm text-[var(--color-text-quiet)]">No results found</div>';
       return;
     }
 
@@ -105,7 +105,7 @@
           <div class="flex items-center gap-2 mt-0.5">
             ${item.category ? `<span class="text-xs text-[var(--color-primary)]/70">${escapeHtml(item.category)}</span>` : ''}
             ${item.category ? '<span class="w-px h-2.5 bg-[var(--color-border)]"></span>' : ''}
-            <span class="text-xs text-[var(--color-text-quiet)]">博客</span>
+            <span class="text-xs text-[var(--color-text-quiet)]">Blog</span>
           </div>
         </div>
         <svg class="w-4 h-4 text-[var(--color-text-quiet)] shrink-0 mt-1 group-hover:text-[var(--color-primary)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

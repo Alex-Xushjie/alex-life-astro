@@ -104,7 +104,7 @@ const {
 
           const copyBtn = document.createElement('button');
           copyBtn.className = 'copy-btn';
-          copyBtn.title = '复制代码';
+          copyBtn.title = 'Copy code';
           copyBtn.innerHTML =
             '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 
@@ -161,8 +161,146 @@ const {
           localStorage.setItem('locale', locale);
         }
 
-        document.documentElement.lang =
-          locale === 'zh' ? 'zh-CN' : 'en';
+        const translations = new Map([
+          ['Home', '首页'],
+          ['Archives', '文章'],
+          ['Friends', '友链'],
+          ['About', '关于'],
+          ['Categories', '分类'],
+          ['Tags', '标签'],
+          ['Archive', '归档'],
+          ['Pinned', '置顶'],
+          ['Draft', '编辑中'],
+          ['Pinned Posts', '置顶文章'],
+          ['Articles', '文章列表'],
+          ['Previous', '上一页'],
+          ['Next', '下一页'],
+          ['Navigation', '导航'],
+          ['Social', '社交'],
+          ['Table of Contents', '目录'],
+          ['Copy code', '复制代码'],
+          ['Back to top', '返回顶部'],
+          ['Main navigation', '主导航'],
+          ['Search', '搜索'],
+          ['Toggle theme', '切换主题'],
+          ['Menu', '菜单'],
+          ['Switch language', '切换语言'],
+          ['Close search', '关闭搜索'],
+          ['Search articles...', '搜索文章...'],
+          ['Enter keywords to search articles', '输入关键词搜索文章'],
+          ['Loading...', '加载中...'],
+          ['No results found', '没有找到结果'],
+          ['Blog', '博客'],
+          ['Article Archives', '文章归档'],
+          ['Explore Categories', '探索内容分类'],
+          ['Tag Cloud', '标签云'],
+          ['View All', '查看全部'],
+          ['Series', '系列'],
+          ['Share', '分享'],
+          ['Share on Twitter', '分享到 Twitter'],
+          ['Share on WeChat', '分享到微信'],
+          ['Scan with WeChat to share', '用微信扫码分享'],
+          ['WeChat share QR code', '微信分享二维码'],
+          ['Copy link', '复制链接'],
+          ['Posts', '文章'],
+          ['Words', '字数'],
+          ['Show All', '显示全部'],
+          ['Collapse', '收起'],
+          ['Random Picks', '随机推荐'],
+          ['Friend Links', '友情链接'],
+          ['Friends and their latest posts', '友情链接及好友最新文章'],
+          ['My Friends', '我的朋友们'],
+          ['Special Picks', '特别推荐'],
+          ['Friend Activity', '友链圈动态'],
+          ['Total Friends', '友链总数'],
+          ['Active Friends', '活跃友链'],
+          ['Total Articles', '文章总数'],
+          ['Last Updated', '最后更新'],
+          ['No friend links yet', '暂无友链数据'],
+          ['Open sidebar', '打开侧边栏'],
+          ['Close sidebar', '关闭侧边栏'],
+          ['Open table of contents', '打开目录'],
+          ['Close table of contents', '关闭目录'],
+          ['Bridging the digital world, exploring the deep blue.', '连接数字世界，探索深蓝。'],
+          ['Scroll', '滚动'],
+          ['Total', '共'],
+          ['posts across', '篇文章，分布于'],
+          ['categories and', '个分类和'],
+          ['tags.', '个标签。'],
+          ['Browse', '共'],
+          ['categories across', '个分类，共'],
+          ['posts.', '篇文章。'],
+          ['Powered by', '技术支持'],
+          ['Unable to connect to the friend-links service', '无法连接到友链服务'],
+          ['Comment seems stuck. Try to refresh?', '评论加载似乎遇到问题，请尝试刷新。'],
+        ]);
+
+        const patterns = [
+          [/^(\d+) words$/, '$1 字'],
+          [/^(\d+) posts$/, '$1 篇'],
+          [/^(\d+) articles$/, '$1 篇文章'],
+          [/^(\d+) articles · ([\d.]+k) words$/, '$1 篇文章 · $2 字'],
+          [/^Show All \((\d+)\)$/, '显示全部 ($1)'],
+          [/^\((\d+) posts\)$/, '($1 篇)'],
+          [/^Page (\d+)$/, '第 $1 页'],
+          [/^Category: (.+)$/, '分类：$1'],
+          [/^Tag: (.+)$/, '标签：$1'],
+          [/^Series: (.+)$/, '系列：$1'],
+          [/^(\d+) tags$/, '$1 个标签'],
+          [/^Service URL: (.+)$/, '服务地址：$1'],
+        ];
+
+        function translateText(text) {
+          const direct = translations.get(text);
+          if (direct) return direct;
+          for (const [pattern, replacement] of patterns) {
+            if (pattern.test(text)) return text.replace(pattern, replacement);
+          }
+          return text;
+        }
+
+        function applyTranslations(root = document) {
+          document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
+
+          root.querySelectorAll?.('[data-en][data-zh]').forEach((element) => {
+            const value = element.getAttribute('data-' + locale);
+            if (value) element.textContent = value;
+          });
+
+          if (locale !== 'zh') return;
+
+          const attributeNames = ['aria-label', 'placeholder', 'title', 'alt'];
+          const elements = root instanceof Element ? [root, ...root.querySelectorAll('*')] : root.querySelectorAll('*');
+          elements.forEach((element) => {
+            attributeNames.forEach((attribute) => {
+              const value = element.getAttribute?.(attribute);
+              if (value) element.setAttribute(attribute, translateText(value));
+            });
+          });
+
+          const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+          let node;
+          while ((node = walker.nextNode())) {
+            const parent = node.parentElement;
+            if (!parent || parent.closest('script, style, pre, code, .prose, [data-no-translate]')) continue;
+            const value = node.nodeValue || '';
+            const trimmed = value.trim();
+            if (!trimmed) continue;
+            const translated = translateText(trimmed);
+            if (translated !== trimmed) node.nodeValue = value.replace(trimmed, translated);
+          }
+        }
+
+        applyTranslations();
+        document.addEventListener('astro:after-swap', () => applyTranslations());
+
+        if (locale === 'zh') {
+          new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.target instanceof Element) applyTranslations(mutation.target);
+            });
+          }).observe(document.body, { childList: true, subtree: true });
+        }
       })();
     </script>
   </body>
