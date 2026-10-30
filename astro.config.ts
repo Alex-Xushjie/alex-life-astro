@@ -6,7 +6,7 @@ import { unified } from '@astrojs/markdown-remark';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  site: 'https://safetystop.qzz.io',
+  site: 'https://safetystop.top',
   integrations: [mdx()],
   vite: {
     plugins: [

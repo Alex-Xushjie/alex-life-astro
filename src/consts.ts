@@ -2,7 +2,7 @@
 export const SITE_DESCRIPTION = 'Bridging the digital world, exploring the deep blue.';
 export const SITE_AUTHOR = 'Alex XU';
 export const SITE_ROLE = 'Network Engineer & Diver';
-export const SITE_URL = 'https://safetystop.qzz.io';
+export const SITE_URL = 'https://safetystop.top';
 export const SITE_AVATAR = '/images/avatar.png';
 export const SITE_COVER = '/images/background.jpg';
 

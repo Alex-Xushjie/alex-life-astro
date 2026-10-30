@@ -2,7 +2,7 @@
 
 Alex XU 的个人博客，记录网络工程、潜水，以及数字世界与深蓝之间的探索。
 
-- 网站：https://safetystop.qzz.io
+- 网站：https://safetystop.top
 - GitHub：https://github.com/Alex-Xushjie
 - 仓库：https://github.com/Alex-Xushjie/alex-life-astro
 
@@ -45,7 +45,7 @@ npm run preview
 export const SITE_TITLE = "Alex's Life";
 export const SITE_DESCRIPTION = 'Bridging the digital world, exploring the deep blue.';
 export const SITE_AUTHOR = 'Alex XU';
-export const SITE_URL = 'https://safetystop.qzz.io';
+export const SITE_URL = 'https://safetystop.top';
 export const SITE_AVATAR = '/images/avatar.png';
 export const SITE_COVER = '/images/background.jpg';
 ```
