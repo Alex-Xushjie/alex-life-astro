@@ -11,6 +11,7 @@ export const PAGE_SIZE = 10;
 export const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Archives', href: '/archives' },
+  { label: 'Dictionary', href: '/dictionary/' },
   { label: 'Friends', href: '/friends' },
   { label: 'About', href: '/about' },
 ];
